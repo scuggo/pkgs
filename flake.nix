@@ -36,8 +36,11 @@
               let
                 isDrv = lib.isDerivation pkg;
                 isAttrs = lib.isAttrs pkg;
+                isSameSystem = lib.meta.availableOn pkgs.stdenv.hostPlatform pkg;
               in
-              if isDrv then
+              if !isSameSystem then
+                [ ]
+              else if isDrv then
                 [
                   (lib.nameValuePair name pkg)
                 ]
@@ -48,14 +51,32 @@
             flatPackages = builtins.listToAttrs (
               lib.lists.flatten (lib.mapAttrsToList (name: pkg: recursePackage name pkg) scope)
             );
-            workingPackages = lib.filterAttrs (_: pkg: !pkg.meta.broken) self.packages.${system};
+            workingPackages = lib.filterAttrs (_: pkg: !pkg.meta.broken) flatPackages;
+
+            recursePackageSets =
+              pkg:
+              let
+                isDrv = lib.isDerivation pkg;
+                isAttrs = lib.isAttrs pkg;
+                isSameSystem = lib.meta.availableOn pkgs.stdenv.hostPlatform pkg;
+              in
+              if isDrv && isSameSystem then
+                pkg
+              else if isAttrs then
+                lib.mapAttrs (_: subPkg: recursePackageSets subPkg) pkg
+              else
+                null;
+
+            # Recursively filter out nulls and remove overrides (probably a btter way to do this but it works for now)
+            packageSets = lib.filterAttrsRecursive (k: v: v != null && k != "override") (
+              lib.mapAttrs (name: pkg: recursePackageSets pkg) scope
+            );
           in
           {
+            inherit packageSets;
             inherit flatPackages;
             inherit pkgs;
-            packages = lib.filterAttrs (
-              _: pkg: lib.isDerivation pkg && (lib.meta.availableOn pkgs.stdenv.hostPlatform pkg)
-            ) scope;
+            packages = packageSets;
             checks = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") workingPackages;
           }
         );

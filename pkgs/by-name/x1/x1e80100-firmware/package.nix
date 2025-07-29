@@ -34,10 +34,10 @@ stdenv.mkDerivation (
       tree
     ];
     unpackPhase = ''
-      msiextract -C . $src
+      msiextract -C . "$src"
     '';
     buildPhase = ''
-      mkdir -p $out/lib/firmware/qcom/x1e80100/microsoft/Romulus
+      mkdir -p "$out/lib/firmware/qcom/x1e80100/microsoft/Romulus"
       for file in ${lib.concatStringsSep " " fw_files}; do
           echo -e "\tSearching for $file..."
           fw_path=$(find . -type f -name "$file" -print | head -n 1)
@@ -48,7 +48,7 @@ stdenv.mkDerivation (
               exit 1
           fi
       done
-      cp $out/lib/firmware/qcom/x1e80100/microsoft/Romulus/qcdxkmsuc8380.mbn $out/lib/firmware/qcom/x1e80100/microsoft/qcdxkmsuc8380.mbn
+      cp "$out/lib/firmware/qcom/x1e80100/microsoft/Romulus/qcdxkmsuc8380.mbn" "$out/lib/firmware/qcom/x1e80100/microsoft/qcdxkmsuc8380.mbn"
     '';
     meta = {
       platforms = [ "aarch64-linux" ];

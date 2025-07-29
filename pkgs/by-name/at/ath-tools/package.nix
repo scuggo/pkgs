@@ -13,10 +13,6 @@ let
     hash = "sha256-iE4lqyr3zmLcgFnsrDvQ/CKUV15ijqmIbUIs9sgMECg=";
   };
 in
-lib.packagesFromDirectoryRecursive {
-  inherit callPackage newScope;
-  directory = ./tools;
-}
-# lib.makeScope newScope (self: {
-#   ath12k-tools = self.callPackage ./ath12k-tools.nix { inherit src; };
-# })
+lib.makeScope newScope (self: {
+  ath12k-tools = self.callPackage ./ath12k-tools.nix { inherit src; };
+})
