@@ -1,0 +1,12 @@
+--- a/board-2.json	2025-07-24 19:46:44.712406478 +0000
++++ b/board-2.json	2025-07-24 19:46:42.655405480 +0000
+@@ -27,7 +27,8 @@
+             },
+             {
+                 "names": [
+-                    "bus=pci,vendor=17cb,device=1107,subsystem-vendor=17cb,subsystem-device=3378,qmi-chip-id=2,qmi-board-id=255"
++                    "bus=pci,vendor=17cb,device=1107,subsystem-vendor=17cb,subsystem-device=3378,qmi-chip-id=2,qmi-board-id=255",
++                    "bus=pci,vendor=17cb,device=1107,subsystem-vendor=17cb,subsystem-device=1107,qmi-chip-id=2,qmi-board-id=255"
+                 ],
+                 "data": "bus=pci,vendor=17cb,device=1107,subsystem-vendor=17cb,subsystem-device=3378,qmi-chip-id=2,qmi-board-id=255.bin"
+             },
