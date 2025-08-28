@@ -26,8 +26,8 @@ stdenv.mkDerivation (
   {
     name = "x1e80100-firmware";
     src = fetchurl {
-      url = "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.061.7304.0.msi";
-      sha256 = "sha256-x75NsuZZr64XfGhjghIoiymdhhb/rM0iaV9EohwPbrs=";
+      url = "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.082.26035.0.msi";
+      hash = "sha256-8zn9b9NQUSlaXLnbfQdvp0LfXWreK5oCoKZFgkiuLzQ=";
     };
     nativeBuildInputs = [
       msitools
