@@ -145,22 +145,22 @@
 
         # Install Desktop Entry
         install -D chrome/installer/linux/common/desktop.template \
-          $out/share/applications/chromium-browser.desktop
+          $out/share/applications/helium-browser.desktop
 
-        substituteInPlace $out/share/applications/chromium-browser.desktop \
-          --replace "@@MENUNAME@@" "Chromium" \
-          --replace "@@PACKAGE@@" "chromium" \
-          --replace "Exec=/usr/bin/@@USR_BIN_SYMLINK_NAME@@" "Exec=chromium"
+        substituteInPlace $out/share/applications/helium-browser.desktop \
+          --replace "@@MENUNAME@@" "Helium" \
+          --replace "@@PACKAGE@@" "helium" \
+          --replace "Exec=/usr/bin/@@USR_BIN_SYMLINK_NAME@@" "Exec=helium"
 
         # Append more mime types to the end
         sed -i '/^MimeType=/ s,$,x-scheme-handler/webcal;x-scheme-handler/mailto;x-scheme-handler/about;x-scheme-handler/unknown,' \
-          $out/share/applications/chromium-browser.desktop
+          $out/share/applications/helium-browser.desktop
 
         # See https://github.com/NixOS/nixpkgs/issues/12433
         sed -i \
           -e '/\[Desktop Entry\]/a\' \
-          -e 'StartupWMClass=chromium-browser' \
-          $out/share/applications/chromium-browser.desktop
+          -e 'StartupWMClass=helium-browser' \
+          $out/share/applications/helium-browser.desktop
       '';
 
       passthru = {
