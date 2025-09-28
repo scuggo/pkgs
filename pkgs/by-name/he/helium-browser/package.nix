@@ -74,7 +74,7 @@ stdenv.mkDerivation {
       makeWrapper "${browserBinary}" "$out/bin/helium" \
         --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}" \
 
-      ed -v -s "$out/bin/chromium" << EOF
+      ed -v -s "$out/bin/helium" << EOF
       2i
 
       if [ -x "/run/wrappers/bin/${sandboxExecutableName}" ]
@@ -85,7 +85,7 @@ stdenv.mkDerivation {
       fi
 
       # Make generated desktop shortcuts have a valid executable name.
-      export CHROME_WRAPPER='chromium'
+      export CHROME_WRAPPER='helium'
 
     ''
     + lib.optionalString (libPath != "") ''
