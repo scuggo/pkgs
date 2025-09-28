@@ -1,0 +1,18 @@
+diff --git a/utils/generate_resources.py b/utils/generate_resources.py
+index f14d3c03..9fcc1df3 100644
+--- a/utils/generate_resources.py
++++ b/utils/generate_resources.py
+@@ -1,3 +1,4 @@
++#!/usr/bin/env python3
+ # Copyright 2025 The Helium Authors
+ # You can use, redistribute, and/or modify this source code under
+ # the terms of the GPL-3.0 license that can be found in the LICENSE file.
+diff --git a/utils/replace_resources.py b/utils/replace_resources.py
+index 935ab525..d30bfa8f 100644
+--- a/utils/replace_resources.py
++++ b/utils/replace_resources.py
+@@ -1,3 +1,4 @@
++#!/usr/bin/env python3
+ # Copyright 2025 The Helium Authors
+ # You can use, redistribute, and/or modify this source code under
+ # the terms of the GPL-3.0 license that can be found in the LICENSE file.

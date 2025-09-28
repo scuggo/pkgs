@@ -11,11 +11,11 @@
       self,
       nixpkgs,
       flake-utils,
-    }:
+    }@inputs:
 
     {
       overlays.default =
-        final: prev: (import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./pkgs/by-name) final prev;
+        final: prev: ((import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./pkgs/by-name) final prev);
     }
     //
       flake-utils.lib.eachSystem
