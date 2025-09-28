@@ -16,10 +16,14 @@
   coreutils,
   gnugrep,
   callPackage,
+  rustc,
 }:
 let
   upstream-info = (lib.importJSON ./info.json)."ungoogled-chromium";
-  unwrapped = callPackage ./unwrapped.nix { inherit helium-patcher-unwrapped stdenv upstream-info; };
+  unwrapped = callPackage ./unwrapped.nix {
+    inherit helium-patcher-unwrapped upstream-info;
+    stdenv = rustc.llvmPackages.stdenv;
+  };
   helium-patcher-unwrapped = callPackage ./helium-patcher.nix { };
   sandboxExecutableName = unwrapped.passthru.sandboxExecutableName;
 in
