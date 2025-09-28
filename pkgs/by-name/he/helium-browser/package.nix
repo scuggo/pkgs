@@ -57,7 +57,7 @@ stdenv.mkDerivation {
 
   buildCommand =
     let
-      browserBinary = "${unwrapped}/libexec/chromium/chromium";
+      browserBinary = "${unwrapped}/libexec/helium/helium";
       libPath = lib.makeLibraryPath [
         libva
         pipewire
@@ -71,7 +71,7 @@ stdenv.mkDerivation {
     ''
       mkdir -p "$out/bin"
 
-      makeWrapper "${browserBinary}" "$out/bin/chromium" \
+      makeWrapper "${browserBinary}" "$out/bin/helium" \
         --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}" \
 
       ed -v -s "$out/bin/chromium" << EOF
@@ -113,7 +113,7 @@ stdenv.mkDerivation {
 
       ln -sv "${unwrapped.sandbox}" "$sandbox"
 
-      ln -s "$out/bin/chromium" "$out/bin/chromium-browser"
+      ln -s "$out/bin/helium" "$out/bin/helium-browser"
 
       mkdir -p "$out/share"
       for f in '${unwrapped}'/share/*; do # hello emacs */
