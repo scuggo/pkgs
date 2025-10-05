@@ -20,14 +20,17 @@ stdenv.mkDerivation (
       "qcadsp8380.mbn"
       "qccdsp8380.mbn"
       "qcdxkmsuc8380.mbn"
+      "bdwlan01.e0b"
     ];
 
   in
-  {
+
+  rec {
     name = "x1e80100-firmware";
+    version = "26100_25.084.40393.0";
     src = fetchurl {
-      url = "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.082.26035.0.msi";
-      hash = "sha256-8zn9b9NQUSlaXLnbfQdvp0LfXWreK5oCoKZFgkiuLzQ=";
+      url = "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_${version}.msi";
+      hash = "sha256-EHpq5yqnq2GwH5keCEbWvDEoprQA+74HDPHcq/eTm44=";
     };
     nativeBuildInputs = [
       msitools
