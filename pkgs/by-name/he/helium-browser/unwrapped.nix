@@ -10,6 +10,10 @@
   electron-source,
   helium-patcher-unwrapped,
   fetchzip,
+
+  proprietaryCodecs,
+  cupsSupport,
+  pulseSupport,
 }:
 (
   (chromium.passthru.mkDerivation.override (
@@ -44,7 +48,14 @@
       inherit stdenv;
       ungoogled = true;
       ungoogled-chromium = helium-patcher-unwrapped;
-      inherit upstream-info chromiumVersionAtLeast versionRange;
+      inherit
+        upstream-info
+        chromiumVersionAtLeast
+        versionRange
+        proprietaryCodecs
+        cupsSupport
+        pulseSupport
+        ;
 
     }
   ))

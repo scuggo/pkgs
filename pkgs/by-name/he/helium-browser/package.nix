@@ -17,15 +17,44 @@
   gnugrep,
   callPackage,
   rustc,
+  runCommand,
+  widevine-cdm,
+  enableWideVine ? false,
+  proprietaryCodecs ? true,
+  cupsSupport ? true,
+  pulseSupport ? stdenv.hostPlatform.isLinux,
+  commandLineArgs ? "",
+
 }:
 let
   upstream-info = (lib.importJSON ./info.json)."ungoogled-chromium";
   unwrapped = callPackage ./unwrapped.nix {
-    inherit helium-patcher-unwrapped upstream-info;
+    inherit
+      helium-patcher-unwrapped
+      upstream-info
+      proprietaryCodecs
+      cupsSupport
+      pulseSupport
+      ;
     stdenv = rustc.llvmPackages.stdenv;
   };
   helium-patcher-unwrapped = callPackage ./helium-patcher.nix { };
   sandboxExecutableName = unwrapped.passthru.sandboxExecutableName;
+
+  chromiumWV =
+    let
+      browser = unwrapped;
+    in
+    if enableWideVine then
+      runCommand (browser.name + "-wv") { version = browser.version; } ''
+        mkdir -p $out
+        cp -a ${browser}/* $out/
+        chmod u+w $out/libexec/chromium
+        cp -a ${widevine-cdm}/share/google/chrome/WidevineCdm $out/libexec/chromium/
+      ''
+    else
+      browser;
+
 in
 stdenv.mkDerivation {
   pname = "helium-browser";
@@ -57,7 +86,7 @@ stdenv.mkDerivation {
 
   buildCommand =
     let
-      browserBinary = "${unwrapped}/libexec/helium/helium";
+      browserBinary = "${chromiumWV}/libexec/helium/helium";
       libPath = lib.makeLibraryPath [
         libva
         pipewire
@@ -73,7 +102,7 @@ stdenv.mkDerivation {
 
       makeWrapper "${browserBinary}" "$out/bin/helium" \
         --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}" \
-
+        --add-flags ${lib.escapeShellArg commandLineArgs}
       ed -v -s "$out/bin/helium" << EOF
       2i
 
