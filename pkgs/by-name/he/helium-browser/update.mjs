@@ -4,7 +4,12 @@
 */
 
 console.log(process.cwd())
-const nixpkgs = "@nixpkgs@"
+
+const custompkgs = (await $`git rev-parse --show-toplevel`).stdout.trim()
+const $custompkgs = $({
+  cwd:custompkgs
+})
+const nixpkgs = "<nixpkgs>"
 
 const dummy_hash = 'sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA='
 
@@ -111,13 +116,13 @@ for (const attr_path of Object.keys(lockfile)) {
       }
 
       console.log(`[${chalk.red(path)}] FOD prefetching ${value.url}@${value.rev}...`)
-      // value.hash = await prefetch_FOD('-A', `${attr_path}.browser.passthru.chromiumDeps."${path}"`)
-      value.hash = await prefetch_flake_FOD(`.#default.browser.passthru.chromiumDeps."${path}"`)
-      console.log(`[${chalk.green(path)}] FOD prefetching successful`)
+      // value.hash = await prefetch_FOD('./package.nix', '-A', `${attr_path}.browser.passthru.chromiumDeps."${path}"`)
+      value.hash = await prefetch_flake_FOD(`.#helium-browser.browser.passthru.chromiumDeps."${path}"`)
+      // console.log(`[${chalk.green(path)}] FOD prefetching successful`)
     }
 
-    // lockfile[attr_path].deps.npmHash = await prefetch_FOD('-A', `${attr_path}.browser.passthru.npmDeps`)
-    lockfile[attr_path].deps.npmHash = await prefetch_flake_FOD(`.#default.browser.passthru.npmDeps`)
+    // lockfile[attr_path].deps.npmHash = await prefetch_FOD('./package.nix', '-A', `${attr_path}.browser.passthru.npmDeps`)
+    lockfile[attr_path].deps.npmHash = await prefetch_flake_FOD(`.#helium-browser.browser.passthru.npmDeps`)
 
     console.log(chalk.green(`[${attr_path}] Done updating ${attr_path} from ${version_nixpkgs} to ${version_upstream}!`))
   }
@@ -203,9 +208,11 @@ async function get_latest_chromium_release(platform) {
 
 async function get_latest_ungoogled_release() {
   const ungoogled_tags = await (await fetch('https://api.github.com/repos/imputnet/helium/tags')).json()
-  const chromium_releases = await (await fetch('https://versionhistory.googleapis.com/v1/chrome/platforms/linux/channels/stable/versions/all/releases')).json()
-  const chromium_release_map = chromium_releases.releases.map((x) => x.version)
-  return "0.4.13" // TODO: figure out how to actually properly do this stuff
+  // console.log(ungoogled_tags)
+  // const chromium_releases = await (await fetch('https://versionhistory.googleapis.com/v1/chrome/platforms/linux/channels/stable/versions/all/releases')).json()
+  // const chromium_release_map = chromium_releases.releases.map((x) => x.version)
+  // return "0.5.2" // TODO: figure out how to actually properly do this stuff
+  return ungoogled_tags[0].name
 }
 
 
@@ -274,7 +281,7 @@ async function prefetch_FOD(...args) {
   return hash
 }
 async function prefetch_flake_FOD(...args) {
-  const { stderr } = await $`nix build ${args}`.nothrow()
+  const { stderr } = await $custompkgs`nix build ${args}`.nothrow()
   const hash = /\s+got:\s+(?<hash>.+)$/m.exec(stderr)?.groups?.hash
   if (hash == undefined) {
     throw new Error(chalk.red('Expected to find hash in nix build stderr output:') + stderr)

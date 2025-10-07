@@ -7,16 +7,47 @@
   overrideCC,
   pkgsBuildBuild,
   lib,
+  electron-source,
   helium-patcher-unwrapped,
   fetchzip,
 }:
 (
-  (chromium.passthru.mkDerivation.override (old: {
-    inherit stdenv;
-    ungoogled = true;
-    ungoogled-chromium = helium-patcher-unwrapped;
-    inherit upstream-info;
-  }))
+  (chromium.passthru.mkDerivation.override (
+    old:
+    let
+      warnObsoleteVersionConditional =
+        min-version: result:
+        let
+          min-supported-version = (lib.head (lib.attrValues electron-source)).unwrapped.info.chromium.version;
+          # Warning can be toggled by changing the value of enabled:
+          enabled = false;
+        in
+        lib.warnIf (enabled && lib.versionAtLeast min-supported-version min-version)
+          "chromium: min-supported-version ${min-supported-version} is newer than a conditional bounded at ${min-version}. You can safely delete it."
+          result;
+      chromiumVersionAtLeast =
+        min-version:
+        let
+          result = lib.versionAtLeast upstream-info.version min-version;
+        in
+        warnObsoleteVersionConditional min-version result;
+      versionRange =
+        min-version: upto-version:
+        let
+          inherit (upstream-info) version;
+          result = lib.versionAtLeast version min-version && lib.versionOlder version upto-version;
+        in
+        warnObsoleteVersionConditional upto-version result;
+
+    in
+    {
+      inherit stdenv;
+      ungoogled = true;
+      ungoogled-chromium = helium-patcher-unwrapped;
+      inherit upstream-info chromiumVersionAtLeast versionRange;
+
+    }
+  ))
   (
     base:
     let
@@ -82,7 +113,6 @@
         chmod +rw -R src/third_party/ublock
         cp -r ${search-engine-data}/. src/third_party/search_engines_data/resources_internal
         chmod +rw -R src/third_party/search_engines_data/resources_internal
-        # chmod +x src/components/helium_onboarding/node_modules/@esbuild/linux-x64/bin/esbuild
       '';
       postPatch = base.postPatch + ''
         "${helium}/utils/name_substitution.py" --sub -t .
@@ -91,7 +121,6 @@
         "${helium}/utils/generate_resources.py" "${helium}/resources/generate_resources.txt" "$TMPDIR/helium-resources"
         "${helium}/utils/replace_resources.py" "${helium}/resources/helium_resources.txt" "$TMPDIR/helium-resources" .
       '';
-      # stdenv = ccacheStdenv;
       name = "helium-browser";
       packageName = "helium";
       buildTargets = [
