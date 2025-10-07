@@ -127,14 +127,6 @@ stdenv.mkDerivation {
     inherit (unwrapped) upstream-info;
     browser = unwrapped;
     inherit sandboxExecutableName;
-    # TODO: enable and fix this script when bothered
-    # updateScript = replaceVarsWith {
-    #   src = ./update.mjs;
-    #   replacements = {
-    #     inherit nixpkgs;
-    #   };
-    #   dir = "bin";
-    #   isExecutable = true;
-    # };
+    updateScript = ./update.mjs;
   };
 }
