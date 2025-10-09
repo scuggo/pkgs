@@ -113,7 +113,7 @@
     rec {
       inherit stdenv;
       pname = "helium-browser-unwrapped";
-      version = "${upstream-info.version}-${upstream-info.deps.ungoogled-patches.rev}";
+      version = "${upstream-info.deps.ungoogled-patches.rev}-${upstream-info.version}";
       depsBuildBuild = lib.filter (
         d: d != buildPlatformLlvmStdenv && d != buildPlatformLlvmStdenv.cc
       ) base.depsBuildBuild;
