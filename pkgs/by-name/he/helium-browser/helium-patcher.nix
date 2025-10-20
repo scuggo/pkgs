@@ -24,7 +24,7 @@ stdenv.mkDerivation {
 
   dontBuild = true;
 
-  patches = [ ./fix-scripts.patch ];
+  # patches = [ ./fix-scripts.patch ];
 
   buildInputs = [
 
