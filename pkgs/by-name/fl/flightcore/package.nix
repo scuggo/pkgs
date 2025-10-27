@@ -14,7 +14,6 @@
   webkitgtk_4_1,
   wrapGAppsHook4,
   fetchFromGitHub,
-  breakpointHook,
 }:
 
 rustPlatform.buildRustPackage (finalAttrs: {
@@ -37,9 +36,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
   postPatch = ''
     jq '.bundle.createUpdaterArtifacts = false' src-tauri/tauri.conf.json | sponge src-tauri/tauri.conf.json
   '';
-  # cargoHash = "sha256-qh8mHDgIwh20I8P8rx25CZIVB8X4ZtY7/lyGQ3xy/7k=";
-
-  # Assuming our app's frontend uses `npm` as a package manager
   npmDeps = fetchNpmDeps {
     name = "${finalAttrs.pname}-${finalAttrs.version}-npm-deps";
     src = "${finalAttrs.src}/src-vue";
@@ -47,36 +43,30 @@ rustPlatform.buildRustPackage (finalAttrs: {
   };
 
   nativeBuildInputs = [
-    # Pull in our main hook
     cargo-tauri.hook
 
-    # Setup npm
     nodejs
     npmHooks.npmConfigHook
 
-    # Make sure we can find our libraries
     pkg-config
 
     jq
     moreutils
-    breakpointHook
   ]
   ++ lib.optionals stdenv.hostPlatform.isLinux [ wrapGAppsHook4 ];
 
   buildInputs = lib.optionals stdenv.hostPlatform.isLinux [
-    glib-networking # Most Tauri apps need networking
+    glib-networking
     openssl
     webkitgtk_4_1
   ];
 
-  # Set our Tauri source directory
   cargoRoot = "src-tauri";
   npmRoot = "src-vue";
-  # And make sure we build there too
+
   buildAndTestSubdir = finalAttrs.cargoRoot;
 
   meta = {
     description = "FlightCore A Northstar installer, updater, and mod-manager";
-
   };
 })
