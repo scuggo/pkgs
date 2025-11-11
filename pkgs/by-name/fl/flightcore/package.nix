@@ -67,6 +67,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
   buildAndTestSubdir = finalAttrs.cargoRoot;
 
   meta = {
+    platforms = [ "x86_64-linux" ];
     description = "FlightCore A Northstar installer, updater, and mod-manager";
   };
 })
