@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: attic login pkgs https://attic.scug.io ${{ secrets.ATTIC_TOKEN }}
-      - run: nix-fast-build --systems "x86_64-linux aarch64-linux" --no-nom --attic-cache pkgs
+      - run: nix-fast-build --systems "x86_64-linux aarch64-linux" --skip-cached --no-nom --attic-cache pkgs

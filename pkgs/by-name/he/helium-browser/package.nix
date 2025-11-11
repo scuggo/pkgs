@@ -151,7 +151,9 @@ stdenv.mkDerivation {
     '';
 
   inherit (unwrapped) packageName;
-  meta = unwrapped.meta;
+  meta = unwrapped.meta // {
+    platforms = [ "x86_64-linux" ];
+  };
   passthru = {
     inherit (unwrapped) upstream-info;
     browser = unwrapped;
