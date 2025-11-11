@@ -12,13 +12,8 @@
       nixpkgs,
       flake-utils,
     }@inputs:
-
-    {
-      overlays.default =
-        final: prev: ((import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./pkgs/by-name) final prev);
-    }
-    //
-      flake-utils.lib.eachSystem
+    (nixpkgs.lib.recursiveUpdate
+      (flake-utils.lib.eachSystem
         [
           "x86_64-linux"
           "aarch64-linux"
@@ -73,8 +68,17 @@
             # );
           in
           {
+            overlays.default = final: prev: flatPackages;
             packages = flatPackages;
             checks = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") workingPackages;
           }
-        );
+        )
+      )
+      {
+        overlays = {
+          default =
+            final: prev: ((import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./pkgs/by-name) final prev);
+        };
+      }
+    );
 }

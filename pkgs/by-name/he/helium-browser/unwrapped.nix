@@ -77,11 +77,11 @@
 
       ublock_src =
         let
-          version = "1.66.4";
+          version = "1.67.0";
         in
         fetchurl {
           url = "https://github.com/imputnet/ublock-origin-crx/releases/download/${version}/uBlock0_${version}.crx";
-          hash = "sha256-CMPHVEpSeKA1ZJX3Ia5gccIr+4KDFs6OF+IgO0Zhq74=";
+          hash = "sha256-06NjhGEfV5Msg098vq6NdPXPrGNrqVUkz+nlLoFVAac=";
 
           recursiveHash = true;
           downloadToTemp = true;
@@ -96,11 +96,11 @@
         };
       helium-onboarding =
         let
-          version = "202509241653";
+          version = "202511061712";
         in
         fetchzip {
           url = "https://github.com/imputnet/helium-onboarding/releases/download/${version}/helium-onboarding-${version}.tar.gz";
-          hash = "sha256-AeGc6psN4nzbjSG/UF1GNiZ7ZhcgA5GwBrGTg2Rt3Ns=";
+          hash = "sha256-wsEFW9Psj4xTFUwgWC12aLErp/QKDIhcRkcw9WZms8Q=";
           stripRoot = false;
         };
       search-engine-data = fetchzip {
@@ -117,6 +117,17 @@
       depsBuildBuild = lib.filter (
         d: d != buildPlatformLlvmStdenv && d != buildPlatformLlvmStdenv.cc
       ) base.depsBuildBuild;
+      # skip chromium-126-llvm-17.patch
+      patches = lib.filter (
+        p:
+        let
+          name = (builtins.baseNameOf p);
+        in
+        !builtins.elem name [
+          "chromium-126-llvm-17.patch"
+          "x5k78i7w4zics8v9b9azy4k1g7c8586z-chromium-141-Revert-Remove-unnecessary-include-in-tree_scope.h.patch"
+        ]
+      ) base.patches;
 
       postUnpack = ''
         cp -r ${helium-onboarding}/ src/components/helium_onboarding
