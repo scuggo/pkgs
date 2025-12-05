@@ -10,55 +10,52 @@
   electron-source,
   helium-patcher-unwrapped,
   fetchzip,
-
+  breakpointHook,
   proprietaryCodecs,
   cupsSupport,
   pulseSupport,
 }:
-(
-  (chromium.passthru.mkDerivation.override (
-    old:
+let
+  warnObsoleteVersionConditional =
+    min-version: result:
     let
-      warnObsoleteVersionConditional =
-        min-version: result:
-        let
-          min-supported-version = (lib.head (lib.attrValues electron-source)).unwrapped.info.chromium.version;
-          # Warning can be toggled by changing the value of enabled:
-          enabled = false;
-        in
-        lib.warnIf (enabled && lib.versionAtLeast min-supported-version min-version)
-          "chromium: min-supported-version ${min-supported-version} is newer than a conditional bounded at ${min-version}. You can safely delete it."
-          result;
-      chromiumVersionAtLeast =
-        min-version:
-        let
-          result = lib.versionAtLeast upstream-info.version min-version;
-        in
-        warnObsoleteVersionConditional min-version result;
-      versionRange =
-        min-version: upto-version:
-        let
-          inherit (upstream-info) version;
-          result = lib.versionAtLeast version min-version && lib.versionOlder version upto-version;
-        in
-        warnObsoleteVersionConditional upto-version result;
-
+      min-supported-version = (lib.head (lib.attrValues electron-source)).unwrapped.info.chromium.version;
+      # Warning can be toggled by changing the value of enabled:
+      enabled = true;
     in
-    {
-      inherit stdenv;
-      ungoogled = true;
-      ungoogled-chromium = helium-patcher-unwrapped;
-      inherit
-        upstream-info
-        chromiumVersionAtLeast
-        versionRange
-        proprietaryCodecs
-        cupsSupport
-        pulseSupport
-        ;
+    lib.warnIf (enabled && lib.versionAtLeast min-supported-version min-version)
+      "chromium: min-supported-version ${min-supported-version} is newer than a conditional bounded at ${min-version}. You can safely delete it."
+      result;
+  chromiumVersionAtLeast =
+    min-version:
+    let
+      result = lib.versionAtLeast upstream-info.version min-version;
+    in
+    warnObsoleteVersionConditional min-version result;
+  versionRange =
+    min-version: upto-version:
+    let
+      inherit (upstream-info) version;
+      result = lib.versionAtLeast version min-version && lib.versionOlder version upto-version;
+    in
+    warnObsoleteVersionConditional upto-version result;
 
-    }
-  ))
+in
+(
+  (chromium.passthru.mkDerivation.override (old: {
+    inherit stdenv;
+    ungoogled = true;
+    ungoogled-chromium = helium-patcher-unwrapped;
+    inherit
+      upstream-info
+      chromiumVersionAtLeast
+      versionRange
+      proprietaryCodecs
+      cupsSupport
+      pulseSupport
+      ;
+
+  }))
   (
     base:
     let
@@ -114,9 +111,11 @@
       inherit stdenv;
       pname = "helium-browser-unwrapped";
       version = "${upstream-info.deps.ungoogled-patches.rev}-${upstream-info.version}";
-      depsBuildBuild = lib.filter (
-        d: d != buildPlatformLlvmStdenv && d != buildPlatformLlvmStdenv.cc
-      ) base.depsBuildBuild;
+      depsBuildBuild =
+        lib.filter (d: d != buildPlatformLlvmStdenv && d != buildPlatformLlvmStdenv.cc) base.depsBuildBuild
+        ++ [
+          breakpointHook
+        ];
       # skip chromium-126-llvm-17.patch
       patches = lib.filter (
         p:
@@ -126,6 +125,7 @@
         !builtins.elem name [
           "chromium-126-llvm-17.patch"
           "x5k78i7w4zics8v9b9azy4k1g7c8586z-chromium-141-Revert-Remove-unnecessary-include-in-tree_scope.h.patch"
+          "1rh5mwg9vxra2bbadh2saxzscfpxf5w4-chromium-142-Backport-Add-missing-include-for-FormFieldData-type-completeness.patch"
         ]
       ) base.patches;
 
@@ -217,6 +217,7 @@
 
       passthru = {
         inherit sandboxExecutableName;
+        inherit upstream-info chromiumVersionAtLeast;
       };
 
       requiredSystemFeatures = [ "big-parallel" ];
