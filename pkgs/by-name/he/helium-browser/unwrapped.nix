@@ -114,7 +114,7 @@ in
       depsBuildBuild =
         lib.filter (d: d != buildPlatformLlvmStdenv && d != buildPlatformLlvmStdenv.cc) base.depsBuildBuild
         ++ [
-          breakpointHook
+          # breakpointHook
         ];
       # skip chromium-126-llvm-17.patch
       patches = lib.filter (
