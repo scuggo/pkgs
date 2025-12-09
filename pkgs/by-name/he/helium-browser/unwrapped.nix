@@ -21,7 +21,7 @@ let
     let
       min-supported-version = (lib.head (lib.attrValues electron-source)).unwrapped.info.chromium.version;
       # Warning can be toggled by changing the value of enabled:
-      enabled = true;
+      enabled = false;
     in
     lib.warnIf (enabled && lib.versionAtLeast min-supported-version min-version)
       "chromium: min-supported-version ${min-supported-version} is newer than a conditional bounded at ${min-version}. You can safely delete it."
