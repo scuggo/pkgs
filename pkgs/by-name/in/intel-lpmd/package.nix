@@ -44,15 +44,15 @@ stdenv.mkDerivation (final: {
   # https://github.com/intel/intel-lpmd?tab=readme-ov-file#build-and-install
   configurePhase = ''
     ./autogen.sh --localstatedir=/var --sysconfdir=$out/etc
-    		'';
+  '';
   buildPhase = ''
-            make
-    				mkdir -p "$out/bin"
-    				cp ./intel_lpmd $out/bin/intel_lpmd
+    make
+    mkdir -p "$out/bin"
+    cp ./intel_lpmd $out/bin/intel_lpmd
   '';
   # Needed for config files, which the program will not run without.
   installPhase = ''
-        	mkdir -p "$out/etc/intel_lpmd/"
-    			cp $src/data/* $out/etc/intel_lpmd/ -r 
-            	'';
+    mkdir -p "$out/etc/intel_lpmd/"
+    cp $src/data/* $out/etc/intel_lpmd/ -r 
+  '';
 })
