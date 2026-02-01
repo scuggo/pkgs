@@ -1,0 +1,12 @@
+name: check
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+jobs:
+  build:
+    runs-on: nix
+    steps:
+      - uses: actions/checkout@v4
+      - run: nix-fast-build --skip-cached --systems "x86_64-linux aarch64-linux" --no-nom
