@@ -1,5 +1,6 @@
 {
   lib,
+  callPackage,
   stdenv,
   fetchzip,
   fetchgit,
@@ -9,6 +10,8 @@
 }:
 
 let
+  sources = callPackage ../../../../_sources/generated.nix { };
+
   aarch64-system-register-xmls = fetchzip {
     url = "https://developer.arm.com/-/media/developer/products/architecture/armv8-a-architecture/2020-06/SysReg_xml_v86A-2020-06.tar.gz";
     stripRoot = false;
@@ -52,14 +55,9 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "slbounce";
-  version = "5";
+  version = lib.removePrefix "v" sources.slbounce.version;
 
-  src = fetchFromGitHub {
-    owner = "TravMurav";
-    repo = "slbounce";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-w+0SKR0A/hcFU6iFEOgyG+vWwgAWF8h9D0/X7GSFm7w=";
-  };
+  inherit (sources.slbounce) src;
 
   nativeBuildInputs = [ dtc ];
 

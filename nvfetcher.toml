@@ -1,0 +1,32 @@
+[claude-code-acp]
+src.github = "zed-industries/claude-code-acp"
+fetch.github = "zed-industries/claude-code-acp"
+
+[flightcore]
+src.github = "R2NorthstarTools/FlightCore"
+fetch.github = "R2NorthstarTools/FlightCore"
+
+[radare2-mcp]
+src.github = "radareorg/radare2-mcp"
+fetch.github = "radareorg/radare2-mcp"
+
+[radare2-ghidra]
+src.github = "radareorg/r2ghidra"
+fetch.github = "radareorg/r2ghidra"
+
+[slbounce]
+src.github = "TravMurav/slbounce"
+fetch.github = "TravMurav/slbounce"
+
+[base24-schemes]
+src.git = "https://github.com/tinted-theming/schemes.git"
+fetch.git = "https://github.com/tinted-theming/schemes.git"
+
+[qebspil]
+src.git = "https://github.com/stephan-gh/qebspil.git"
+fetch.git = "https://github.com/stephan-gh/qebspil.git"
+git.fetchSubmodules = true
+
+[ath-tools]
+src.git = "https://github.com/qca/qca-swiss-army-knife.git"
+fetch.git = "https://github.com/qca/qca-swiss-army-knife.git"

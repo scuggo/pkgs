@@ -1,19 +1,17 @@
 {
   lib,
+  callPackage,
   stdenv,
-  fetchFromGitHub,
   ...
 }:
+let
+  sources = callPackage ../../../../_sources/generated.nix { };
+in
 stdenv.mkDerivation (finalAttrs: {
   pname = "base24-schemes";
-  version = "unstable-2025-04-18";
+  version = "unstable-${sources.base24-schemes.date}";
 
-  src = fetchFromGitHub {
-    owner = "tinted-theming";
-    repo = "schemes";
-    rev = "28c26a621123ad4ebd5bbfb34ab39421c0144bdd";
-    hash = "sha256-Fg+rdGs5FAgfkYNCs74lnl8vkQmiZVdBsziyPhVqrlY=";
-  };
+  inherit (sources.base24-schemes) src;
 
   installPhase = ''
     runHook preInstall

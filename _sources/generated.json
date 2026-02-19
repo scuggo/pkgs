@@ -1,0 +1,167 @@
+{
+    "ath-tools": {
+        "cargoLock": null,
+        "date": "2026-01-09",
+        "extract": null,
+        "name": "ath-tools",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "f4901c23602cb5b5d86202f3f7f4a62323fdbc82",
+            "sha256": "sha256-8kRhGM0Q/0GLMNGztiUVnyRYLAFMx/w6prgWJ3EIU1c=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://github.com/qca/qca-swiss-army-knife.git"
+        },
+        "version": "f4901c23602cb5b5d86202f3f7f4a62323fdbc82"
+    },
+    "base24-schemes": {
+        "cargoLock": null,
+        "date": "2026-02-17",
+        "extract": null,
+        "name": "base24-schemes",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "7725e097895102ca2949c7a553b54dca0b2e2667",
+            "sha256": "sha256-lOw77YOBM6HNuWcLL4Qugn+vr4RxMKV8FgXqFlnyLIo=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://github.com/tinted-theming/schemes.git"
+        },
+        "version": "7725e097895102ca2949c7a553b54dca0b2e2667"
+    },
+    "claude-code-acp": {
+        "cargoLock": null,
+        "date": null,
+        "extract": null,
+        "name": "claude-code-acp",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "zed-industries",
+            "repo": "claude-code-acp",
+            "rev": "v0.18.0",
+            "sha256": "sha256-KZg9z8cyMqMHOfATaT2gcbp0+HkqzecQvAVeHN+bCYg=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "v0.18.0"
+    },
+    "flightcore": {
+        "cargoLock": null,
+        "date": null,
+        "extract": null,
+        "name": "flightcore",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "R2NorthstarTools",
+            "repo": "FlightCore",
+            "rev": "v3.2.0",
+            "sha256": "sha256-MFnW9cXFzqmdtC31r8cRcihV3NjGAC6+2/DnNVMheCI=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "v3.2.0"
+    },
+    "qebspil": {
+        "cargoLock": null,
+        "date": "2025-10-25",
+        "extract": null,
+        "name": "qebspil",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": true,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "8e4d9e676a3b3afe136cda9b953a2139ff1a32d0",
+            "sha256": "sha256-kWUXzeYWNxGgmjt/p9yozrWc5ouUs0XXBRfiFMlu+QQ=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://github.com/stephan-gh/qebspil.git"
+        },
+        "version": "8e4d9e676a3b3afe136cda9b953a2139ff1a32d0"
+    },
+    "radare2-ghidra": {
+        "cargoLock": null,
+        "date": null,
+        "extract": null,
+        "name": "radare2-ghidra",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "radareorg",
+            "repo": "r2ghidra",
+            "rev": "6.1.0",
+            "sha256": "sha256-KmzS4Q39ztiGc8rnUqcx5tUXuTCK8WcQrFelKzvaOEw=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "6.1.0"
+    },
+    "radare2-mcp": {
+        "cargoLock": null,
+        "date": null,
+        "extract": null,
+        "name": "radare2-mcp",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "radareorg",
+            "repo": "radare2-mcp",
+            "rev": "1.5.6",
+            "sha256": "sha256-oR7+6djPmrEWpomqNPnw+ciEgXWsB/pmJPvpt37z21w=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "1.5.6"
+    },
+    "slbounce": {
+        "cargoLock": null,
+        "date": null,
+        "extract": null,
+        "name": "slbounce",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "TravMurav",
+            "repo": "slbounce",
+            "rev": "v5",
+            "sha256": "sha256-w+0SKR0A/hcFU6iFEOgyG+vWwgAWF8h9D0/X7GSFm7w=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "v5"
+    }
+}

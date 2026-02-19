@@ -1,23 +1,20 @@
 {
   lib,
+  callPackage,
   stdenv,
-  fetchFromGitHub,
   gnumake,
   dtc,
   glibc,
 }:
 
-stdenv.mkDerivation rec {
+let
+  sources = callPackage ../../../../_sources/generated.nix { };
+in
+stdenv.mkDerivation {
   pname = "qebspil";
-  version = "unstable-2025-10-25";
+  version = "unstable-${sources.qebspil.date}";
 
-  src = fetchFromGitHub {
-    owner = "stephan-gh";
-    repo = "qebspil";
-    rev = "8e4d9e676a3b3afe136cda9b953a2139ff1a32d0";
-    hash = "sha256-kWUXzeYWNxGgmjt/p9yozrWc5ouUs0XXBRfiFMlu+QQ=";
-    fetchSubmodules = true;
-  };
+  inherit (sources.qebspil) src;
 
   nativeBuildInputs = [
     gnumake

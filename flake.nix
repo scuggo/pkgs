@@ -68,9 +68,12 @@
             # );
           in
           {
-            overlays.default = final: prev: flatPackages;
+            overlays = final: prev: flatPackages;
             packages = flatPackages;
             checks = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") workingPackages;
+            devShells.default = pkgs.mkShellNoCC {
+              packages = [ pkgs.nvfetcher ];
+            };
           }
         )
       )
