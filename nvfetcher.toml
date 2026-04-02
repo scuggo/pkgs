@@ -30,3 +30,8 @@ git.fetchSubmodules = true
 [ath-tools]
 src.git = "https://github.com/qca/qca-swiss-army-knife.git"
 fetch.git = "https://github.com/qca/qca-swiss-army-knife.git"
+
+[neovide]
+src.manual = "nightly"
+fetch.git = "https://github.com/neovide/neovide.git"
+cargo_lock = ["Cargo.lock"]
