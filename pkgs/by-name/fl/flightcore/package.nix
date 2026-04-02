@@ -15,7 +15,6 @@
   wrapGAppsHook4,
   fetchFromGitHub,
 }:
-
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "flightcore";
   version = "3.2.0";
@@ -25,7 +24,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     rev = "v${finalAttrs.version}";
     sha256 = "sha256-MFnW9cXFzqmdtC31r8cRcihV3NjGAC6+2/DnNVMheCI=";
   };
-  patches = [ ./cargo-lock.patch ];
+  patches = [./cargo-lock.patch];
   cargoDeps = rustPlatform.fetchCargoVendor {
     src = finalAttrs.src;
     sourceRoot = "${finalAttrs.src.name}/${finalAttrs.cargoRoot}";
@@ -42,18 +41,19 @@ rustPlatform.buildRustPackage (finalAttrs: {
     hash = "sha256-QhUPkCBK1kcAF7gByFxlg8Ca9PLF3evCl0QYEPP/Q2c=";
   };
 
-  nativeBuildInputs = [
-    cargo-tauri.hook
+  nativeBuildInputs =
+    [
+      cargo-tauri.hook
 
-    nodejs
-    npmHooks.npmConfigHook
+      nodejs
+      npmHooks.npmConfigHook
 
-    pkg-config
+      pkg-config
 
-    jq
-    moreutils
-  ]
-  ++ lib.optionals stdenv.hostPlatform.isLinux [ wrapGAppsHook4 ];
+      jq
+      moreutils
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [wrapGAppsHook4];
 
   buildInputs = lib.optionals stdenv.hostPlatform.isLinux [
     glib-networking
@@ -67,7 +67,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
   buildAndTestSubdir = finalAttrs.cargoRoot;
 
   meta = {
-    platforms = [ "x86_64-linux" ];
+    platforms = ["x86_64-linux"];
     description = "FlightCore A Northstar installer, updater, and mod-manager";
   };
 })
