@@ -27,7 +27,7 @@ stdenv.mkDerivation (
 
   rec {
     name = "x1e80100-firmware";
-    version = "26100_25.101.12926.0";
+    version = "26100_26.011.9344.0";
     src = fetchurl {
       # https://www.microsoft.com/en-us/download/details.aspx?id=106120
       url = "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_${version}.msi";
