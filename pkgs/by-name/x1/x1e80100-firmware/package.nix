@@ -31,7 +31,7 @@ stdenv.mkDerivation (
     src = fetchurl {
       # https://www.microsoft.com/en-us/download/details.aspx?id=106120
       url = "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_${version}.msi";
-      hash = "sha256-4LVqkA4YwGrAh3gNSUQ5G2ahwBoj/5QvyFqvNgznvX4=";
+      hash = "sha256-ZkZgmKz5ihrRaarAioWoc0dx9XbmobGwTTyY/VLzahk=";
     };
     nativeBuildInputs = [
       msitools
