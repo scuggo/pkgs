@@ -21,7 +21,7 @@
     },
     "base24-schemes": {
         "cargoLock": null,
-        "date": "2026-03-04",
+        "date": "2026-04-12",
         "extract": null,
         "name": "base24-schemes",
         "passthru": null,
@@ -31,13 +31,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "13b5b0c299982bb361039601e2d72587d6846294",
-            "sha256": "sha256-4eu3LqB9tPqe0Vaqxd4wkZiBbthLbpb7llcoE/p5HT0=",
+            "rev": "3e228732e93c107e8b65b8be30c36e5b3c507d95",
+            "sha256": "sha256-G34G4hri8H2XNwF0e15MFj3sjO8fTOphNk0WjBwnVew=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://github.com/tinted-theming/schemes.git"
         },
-        "version": "13b5b0c299982bb361039601e2d72587d6846294"
+        "version": "3e228732e93c107e8b65b8be30c36e5b3c507d95"
     },
     "claude-code-acp": {
         "cargoLock": null,
@@ -53,12 +53,12 @@
             "name": null,
             "owner": "zed-industries",
             "repo": "claude-code-acp",
-            "rev": "v0.24.2",
-            "sha256": "sha256-SRVbLcGrH5pJt6yfM0ObSso68M+yGateIVYf/kFVDhE=",
+            "rev": "v0.26.0",
+            "sha256": "sha256-2G8gjMCnk3W1I2+4sNsumL15ts9bLXAOMguCmwnzWSA=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v0.24.2"
+        "version": "v0.26.0"
     },
     "flightcore": {
         "cargoLock": null,
@@ -84,7 +84,7 @@
     "neovide": {
         "cargoLock": {
             "Cargo.lock": [
-                "sha256-Qd3Ld0az0b7ixz2ObUucdJO2uWSQs7XiTVdmXJxilhk=/Cargo.lock",
+                "sha256-JBV939TEfG44w59iUJ3KgiCrQ9aCcjmPxu2uoBD_Ank=/Cargo.lock",
                 {}
             ]
         },
@@ -94,12 +94,12 @@
         "passthru": null,
         "pinned": false,
         "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
+            "deepClone": true,
+            "fetchSubmodules": true,
             "leaveDotGit": false,
             "name": null,
             "rev": "nightly",
-            "sha256": "sha256-Qd3Ld0az0b7ixz2ObUucdJO2uWSQs7XiTVdmXJxilhk=",
+            "sha256": "sha256-JBV939TEfG44w59iUJ3KgiCrQ9aCcjmPxu2uoBD/Ank=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://github.com/neovide/neovide.git"

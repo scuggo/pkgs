@@ -34,4 +34,6 @@ fetch.git = "https://github.com/qca/qca-swiss-army-knife.git"
 [neovide]
 src.manual = "nightly"
 fetch.git = "https://github.com/neovide/neovide.git"
+git.fetchSubmodules = true
+git.deepClone = true
 cargo_lock = ["Cargo.lock"]
