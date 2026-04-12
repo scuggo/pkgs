@@ -21,27 +21,27 @@
   };
   base24-schemes = {
     pname = "base24-schemes";
-    version = "13b5b0c299982bb361039601e2d72587d6846294";
+    version = "3e228732e93c107e8b65b8be30c36e5b3c507d95";
     src = fetchgit {
       url = "https://github.com/tinted-theming/schemes.git";
-      rev = "13b5b0c299982bb361039601e2d72587d6846294";
+      rev = "3e228732e93c107e8b65b8be30c36e5b3c507d95";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [];
-      sha256 = "sha256-4eu3LqB9tPqe0Vaqxd4wkZiBbthLbpb7llcoE/p5HT0=";
+      sha256 = "sha256-G34G4hri8H2XNwF0e15MFj3sjO8fTOphNk0WjBwnVew=";
     };
-    date = "2026-03-04";
+    date = "2026-04-12";
   };
   claude-code-acp = {
     pname = "claude-code-acp";
-    version = "v0.24.2";
+    version = "v0.26.0";
     src = fetchFromGitHub {
       owner = "zed-industries";
       repo = "claude-code-acp";
-      rev = "v0.24.2";
+      rev = "v0.26.0";
       fetchSubmodules = false;
-      sha256 = "sha256-SRVbLcGrH5pJt6yfM0ObSso68M+yGateIVYf/kFVDhE=";
+      sha256 = "sha256-2G8gjMCnk3W1I2+4sNsumL15ts9bLXAOMguCmwnzWSA=";
     };
   };
   flightcore = {
@@ -61,14 +61,14 @@
     src = fetchgit {
       url = "https://github.com/neovide/neovide.git";
       rev = "nightly";
-      fetchSubmodules = false;
-      deepClone = false;
+      fetchSubmodules = true;
+      deepClone = true;
       leaveDotGit = false;
       sparseCheckout = [];
-      sha256 = "sha256-Qd3Ld0az0b7ixz2ObUucdJO2uWSQs7XiTVdmXJxilhk=";
+      sha256 = "sha256-JBV939TEfG44w59iUJ3KgiCrQ9aCcjmPxu2uoBD/Ank=";
     };
     cargoLock."Cargo.lock" = {
-      lockFile = ./. + "/sha256-Qd3Ld0az0b7ixz2ObUucdJO2uWSQs7XiTVdmXJxilhk=/Cargo.lock";
+      lockFile = ./. + "/sha256-JBV939TEfG44w59iUJ3KgiCrQ9aCcjmPxu2uoBD_Ank=/Cargo.lock";
       outputHashes = {
       };
     };
