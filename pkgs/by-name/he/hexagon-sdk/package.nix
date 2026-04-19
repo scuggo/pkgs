@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
   meta = {
     description = "Hexagon SDK for working with the Qualcomm NPU/DSP";
     homepage = "https://github.com/snapdragon-toolchain/hexagon-sdk";
-    license = lib.licenses.proprietary;
+    license = lib.licenses.unfree;
     platforms = [
       "x86_64-linux"
     ];
