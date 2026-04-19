@@ -12,7 +12,7 @@ let
   version = "v6.4.0.2";
   src = fetchTarball {
     url = "https://github.com/snapdragon-toolchain/hexagon-sdk/releases/download/v6.4.0.2/hexagon-sdk-v6.4.0.2-amd64-lnx.tar.xz";
-    sha256 = "02xf50s5kr75cm3lr2kmz5dr0w790v9saxx737d15kwm8xvpm9dl";
+    sha256 = "0qadmn84sdqbqh3s837s0amdmln3akb1b01k8x5nha0lkw6a3jwc";
   };
 in
 stdenv.mkDerivation rec {
@@ -28,9 +28,10 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-        runHook preInstall
-    		cp -p ${src} $out/opt
-        runHook postInstall
+            runHook preInstall
+    				mkdir $out
+        		cp -r ${src} $out/opt
+            runHook postInstall
   '';
 
   meta = {
