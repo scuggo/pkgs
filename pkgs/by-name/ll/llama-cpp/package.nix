@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   autoAddDriverRunpath,
   cmake,
   fetchFromGitHub,
@@ -36,7 +37,6 @@
   shaderc,
   vulkan-headers,
   vulkan-loader,
-  hexagon-sdk,
   ninja,
 }:
 
@@ -44,7 +44,14 @@ let
   # It's necessary to consistently use backendStdenv when building with CUDA support,
   # otherwise we get libstdc++ errors downstream.
   # cuda imposes an upper bound on the gcc version
-  effectiveStdenv = if cudaSupport then cudaPackages.backendStdenv else stdenv;
+  buildPkgs = import pkgs.path {
+    system = "x86_64-linux"; # builder uses x86_64
+  };
+
+  # hexagon needs a x86 build env
+  crossPkgs = buildPkgs.pkgsCross.aarch64-multiplatform;
+
+  effectiveStdenv = if hexagonSupport then crossPkgs.stdenv else stdenv;
   inherit (lib)
     cmakeBool
     cmakeFeature
@@ -147,8 +154,8 @@ effectiveStdenv.mkDerivation (finalAttrs: {
   ]
   ++ optionals hexagonSupport [
     (cmakeFeature "GGML_HEXAGON_FP32_QUANTIZE_GROUP_SIZE" "128")
-    (cmakeFeature "HEXAGON_SDK_ROOT" "${hexagon-sdk}/opt/hexagon")
-    (cmakeFeature "HEXAGON_TOOLS_ROOT" "${hexagon-sdk}/opt/hexagon/tools/HEXAGON_Tools/19.0.04")
+    (cmakeFeature "HEXAGON_SDK_ROOT" "${pkgs.hexagon-sdk}/opt/hexagon")
+    (cmakeFeature "HEXAGON_TOOLS_ROOT" "${pkgs.hexagon-sdk}/opt/hexagon/tools/HEXAGON_Tools/19.0.04")
   ];
 
   # upstream plans on adding targets at the cmakelevel, remove those
@@ -190,9 +197,9 @@ effectiveStdenv.mkDerivation (finalAttrs: {
       xddxdd
     ];
     platforms = lib.platforms.unix;
-    badPlatforms = optionals (cudaSupport || openclSupport) lib.platforms.darwin (
-      hexagonSupport && !effectiveStdenv.hostPlatform.aarch64-linux
-    );
-    broken = metalSupport && !effectiveStdenv.hostPlatform.isDarwin;
+    badPlatforms = optionals (cudaSupport || openclSupport) lib.platforms.darwin;
+    broken =
+      (metalSupport && !effectiveStdenv.hostPlatform.isDarwin)
+      || (hexagonSupport && !effectiveStdenv.hostPlatform.isAarch64);
   };
 })
