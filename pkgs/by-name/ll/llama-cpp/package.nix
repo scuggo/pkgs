@@ -36,6 +36,7 @@
   llama-cpp,
   shaderc,
   vulkan-headers,
+  hexagon-sdk,
   vulkan-loader,
   ninja,
 }:
@@ -79,16 +80,20 @@ let
     vulkan-headers
     vulkan-loader
   ];
+
+  hexagonBuildInputs = [
+    hexagon-sdk
+  ];
 in
 effectiveStdenv.mkDerivation (finalAttrs: {
   pname = "llama-cpp";
-  version = "6981";
+  version = "8871";
 
   src = fetchFromGitHub {
     owner = "ggml-org";
     repo = "llama.cpp";
     tag = "b${finalAttrs.version}";
-    hash = "sha256-0WtiHDlMeb+m2XcMwkPFY1mtwVTwRJUoxQSwzpiRbts=";
+    hash = "sha256-dSMomkkG3YFwXAcYTym6Z03u8ZAWFFio8jdQJPMJ/yg=";
     leaveDotGit = true;
     postFetch = ''
       git -C "$out" rev-parse --short HEAD > $out/COMMIT
@@ -98,8 +103,10 @@ effectiveStdenv.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [
     cmake
+    pkgs.clang
     ninja
     pkg-config
+    blas
   ]
   ++ optionals cudaSupport [
     cudaPackages.cuda_nvcc
@@ -112,7 +119,10 @@ effectiveStdenv.mkDerivation (finalAttrs: {
     ++ optionals rocmSupport rocmBuildInputs
     ++ optionals blasSupport [ blas ]
     ++ optionals vulkanSupport vulkanBuildInputs
-    ++ [ curl ];
+    ++ optionals hexagonSupport hexagonBuildInputs
+    ++ [
+      curl
+    ];
 
   preConfigure = ''
     prependToVar cmakeFlags "-DLLAMA_BUILD_COMMIT:STRING=$(cat COMMIT)"
@@ -153,9 +163,17 @@ effectiveStdenv.mkDerivation (finalAttrs: {
     (cmakeBool "CMAKE_SKIP_BUILD_RPATH" true)
   ]
   ++ optionals hexagonSupport [
+    # (cmakeFeature "CMAKE_TOOLCHAIN_FILE" "${finalAttrs.src}/cmake/arm64-linux-clang.cmake")
+    (cmakeFeature "CMAKE_C_FLAGS" "-D__ARM_FEATURE_DOTPROD=1")
+    (cmakeFeature "CMAKE_CXX_FLAGS" "")
+    (cmakeBool "GGML_OPENMP" false)
+    (cmakeBool "GGML_LLAMAFILE" false)
+    (cmakeFeature "GGML_OPENCL" "OFF")
+    (cmakeFeature "PREBUILT_LIB_DIR" "linux_aarch64")
     (cmakeFeature "GGML_HEXAGON_FP32_QUANTIZE_GROUP_SIZE" "128")
-    (cmakeFeature "HEXAGON_SDK_ROOT" "${pkgs.hexagon-sdk}/opt/hexagon")
-    (cmakeFeature "HEXAGON_TOOLS_ROOT" "${pkgs.hexagon-sdk}/opt/hexagon/tools/HEXAGON_Tools/19.0.04")
+    (cmakeFeature "HEXAGON_SDK_ROOT" "${hexagon-sdk}/opt")
+    (cmakeFeature "HEXAGON_TOOLS_ROOT" "${hexagon-sdk}/opt/tools/HEXAGON_Tools/19.0.04")
+    (cmakeFeature "LLAMA_OPENSSL" "OFF")
   ];
 
   # upstream plans on adding targets at the cmakelevel, remove those
