@@ -4,44 +4,45 @@
   fetchurl,
   fetchFromGitHub,
   dockerTools,
-}: {
+}:
+{
   ath-tools = {
     pname = "ath-tools";
-    version = "c8182015b0ec81da1d4c39841aca190deae77c2c";
+    version = "324903e86fbd30d601f404125da74b28d812be4b";
     src = fetchgit {
       url = "https://github.com/qca/qca-swiss-army-knife.git";
-      rev = "c8182015b0ec81da1d4c39841aca190deae77c2c";
+      rev = "324903e86fbd30d601f404125da74b28d812be4b";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sparseCheckout = [];
-      sha256 = "sha256-Va845WLEyB+l7cpLIvYpvwOyMZuLKcb3Afqqs/cUSmI=";
+      sparseCheckout = [ ];
+      sha256 = "sha256-Gykx/uHPzbHPECtiCoRmo9YWxUpYc7Ky1lNBENLsRm4=";
     };
-    date = "2026-03-03";
+    date = "2026-04-15";
   };
   base24-schemes = {
     pname = "base24-schemes";
-    version = "3e228732e93c107e8b65b8be30c36e5b3c507d95";
+    version = "0c94645546f4f3ddac77a1a5fce54eb95bf50795";
     src = fetchgit {
       url = "https://github.com/tinted-theming/schemes.git";
-      rev = "3e228732e93c107e8b65b8be30c36e5b3c507d95";
+      rev = "0c94645546f4f3ddac77a1a5fce54eb95bf50795";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sparseCheckout = [];
-      sha256 = "sha256-G34G4hri8H2XNwF0e15MFj3sjO8fTOphNk0WjBwnVew=";
+      sparseCheckout = [ ];
+      sha256 = "sha256-PDF0/wObw4nIsSBeXVYLsloXOiphXCgIdsrNcVXguKs=";
     };
-    date = "2026-04-12";
+    date = "2026-05-03";
   };
   claude-code-acp = {
     pname = "claude-code-acp";
-    version = "v0.26.0";
+    version = "v0.35.0";
     src = fetchFromGitHub {
       owner = "zed-industries";
       repo = "claude-code-acp";
-      rev = "v0.26.0";
+      rev = "v0.35.0";
       fetchSubmodules = false;
-      sha256 = "sha256-2G8gjMCnk3W1I2+4sNsumL15ts9bLXAOMguCmwnzWSA=";
+      sha256 = "sha256-xb6D4J+EmbK5XCrZCyv1LWYdfmaNDcw7Hk4nHg76uAo=";
     };
   };
   flightcore = {
@@ -57,21 +58,23 @@
   };
   neovide = {
     pname = "neovide";
-    version = "nightly";
+    version = "8c48a699e201aa5559227a96d879b2f57192b354";
     src = fetchgit {
       url = "https://github.com/neovide/neovide.git";
-      rev = "nightly";
-      fetchSubmodules = true;
-      deepClone = true;
+      rev = "8c48a699e201aa5559227a96d879b2f57192b354";
+      fetchSubmodules = false;
+      deepClone = false;
       leaveDotGit = false;
-      sparseCheckout = [];
-      sha256 = "sha256-JBV939TEfG44w59iUJ3KgiCrQ9aCcjmPxu2uoBD/Ank=";
+      sparseCheckout = [ ];
+      sha256 = "sha256-Ke8bM5o33s1h1fHY7Y10fYKpVwS3/pU7iOBpBOC0Dvw=";
     };
     cargoLock."Cargo.lock" = {
-      lockFile = ./. + "/sha256-JBV939TEfG44w59iUJ3KgiCrQ9aCcjmPxu2uoBD_Ank=/Cargo.lock";
+      lockFile = ./. + "/sha256-Ke8bM5o33s1h1fHY7Y10fYKpVwS3_pU7iOBpBOC0Dvw=/Cargo.lock";
       outputHashes = {
+        
       };
     };
+    date = "2026-05-16";
   };
   qebspil = {
     pname = "qebspil";
@@ -82,31 +85,31 @@
       fetchSubmodules = true;
       deepClone = false;
       leaveDotGit = false;
-      sparseCheckout = [];
+      sparseCheckout = [ ];
       sha256 = "sha256-kWUXzeYWNxGgmjt/p9yozrWc5ouUs0XXBRfiFMlu+QQ=";
     };
     date = "2025-10-25";
   };
   radare2-ghidra = {
     pname = "radare2-ghidra";
-    version = "6.1.2";
+    version = "6.1.4";
     src = fetchFromGitHub {
       owner = "radareorg";
       repo = "r2ghidra";
-      rev = "6.1.2";
+      rev = "6.1.4";
       fetchSubmodules = false;
-      sha256 = "sha256-bGA7izBSvlwnD4BZXNucYS39BDdmo+49cY3o4LjIpYM=";
+      sha256 = "sha256-uVMsONXethTq/BL9MBQkDP3iJ6t25PEnpeD/Y17dpxM=";
     };
   };
   radare2-mcp = {
     pname = "radare2-mcp";
-    version = "1.7.2";
+    version = "1.8.0";
     src = fetchFromGitHub {
       owner = "radareorg";
       repo = "radare2-mcp";
-      rev = "1.7.2";
+      rev = "1.8.0";
       fetchSubmodules = false;
-      sha256 = "sha256-ToSvRmgOyrmsFWjfwuDit5hLXYJQD7YKGoy2utkqUe0=";
+      sha256 = "sha256-1tV3mG1hEIcq18cHn5kS4n9ocVZsHQ5A4TCTA3OKzn8=";
     };
   };
   slbounce = {

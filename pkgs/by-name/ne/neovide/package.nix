@@ -44,8 +44,8 @@ in
           owner = "rust-skia";
           repo = "skia";
           # see rust-skia:skia-bindings/Cargo.toml#package.metadata skia
-          tag = "m145-0.92.0";
-          hash = "sha256-9N780AwheKBJRcZC4l/uWFNq+oOyoNp4M6dJAVVAFeo=";
+          tag = "m148-0.97.0";
+          hash = "sha256-uFnYX6ZDg+cJwLyCe6IGB6M3aCyI/+q2aYP4JfHm544=";
         };
         # The externals for skia are taken from skia/DEPS
         externals = linkFarm "skia-externals" (
