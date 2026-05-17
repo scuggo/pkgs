@@ -23,6 +23,9 @@
           let
             pkgs = import nixpkgs {
               inherit system;
+              config = {
+                allowUnfree = true;
+              };
             };
             inherit (pkgs) lib;
             scope = lib.makeScope pkgs.newScope (final: self.overlays.default (pkgs // final) pkgs);
