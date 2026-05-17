@@ -1,7 +1,7 @@
 {
     "ath-tools": {
         "cargoLock": null,
-        "date": "2026-03-03",
+        "date": "2026-04-15",
         "extract": null,
         "name": "ath-tools",
         "passthru": null,
@@ -11,17 +11,17 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "c8182015b0ec81da1d4c39841aca190deae77c2c",
-            "sha256": "sha256-Va845WLEyB+l7cpLIvYpvwOyMZuLKcb3Afqqs/cUSmI=",
+            "rev": "324903e86fbd30d601f404125da74b28d812be4b",
+            "sha256": "sha256-Gykx/uHPzbHPECtiCoRmo9YWxUpYc7Ky1lNBENLsRm4=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://github.com/qca/qca-swiss-army-knife.git"
         },
-        "version": "c8182015b0ec81da1d4c39841aca190deae77c2c"
+        "version": "324903e86fbd30d601f404125da74b28d812be4b"
     },
     "base24-schemes": {
         "cargoLock": null,
-        "date": "2026-04-12",
+        "date": "2026-05-03",
         "extract": null,
         "name": "base24-schemes",
         "passthru": null,
@@ -31,13 +31,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "3e228732e93c107e8b65b8be30c36e5b3c507d95",
-            "sha256": "sha256-G34G4hri8H2XNwF0e15MFj3sjO8fTOphNk0WjBwnVew=",
+            "rev": "0c94645546f4f3ddac77a1a5fce54eb95bf50795",
+            "sha256": "sha256-PDF0/wObw4nIsSBeXVYLsloXOiphXCgIdsrNcVXguKs=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://github.com/tinted-theming/schemes.git"
         },
-        "version": "3e228732e93c107e8b65b8be30c36e5b3c507d95"
+        "version": "0c94645546f4f3ddac77a1a5fce54eb95bf50795"
     },
     "claude-code-acp": {
         "cargoLock": null,
@@ -53,12 +53,12 @@
             "name": null,
             "owner": "zed-industries",
             "repo": "claude-code-acp",
-            "rev": "v0.26.0",
-            "sha256": "sha256-2G8gjMCnk3W1I2+4sNsumL15ts9bLXAOMguCmwnzWSA=",
+            "rev": "v0.35.0",
+            "sha256": "sha256-xb6D4J+EmbK5XCrZCyv1LWYdfmaNDcw7Hk4nHg76uAo=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "v0.26.0"
+        "version": "v0.35.0"
     },
     "flightcore": {
         "cargoLock": null,
@@ -84,27 +84,27 @@
     "neovide": {
         "cargoLock": {
             "Cargo.lock": [
-                "sha256-JBV939TEfG44w59iUJ3KgiCrQ9aCcjmPxu2uoBD_Ank=/Cargo.lock",
+                "sha256-Ke8bM5o33s1h1fHY7Y10fYKpVwS3_pU7iOBpBOC0Dvw=/Cargo.lock",
                 {}
             ]
         },
-        "date": null,
+        "date": "2026-05-16",
         "extract": null,
         "name": "neovide",
         "passthru": null,
         "pinned": false,
         "src": {
-            "deepClone": true,
-            "fetchSubmodules": true,
+            "deepClone": false,
+            "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "nightly",
-            "sha256": "sha256-JBV939TEfG44w59iUJ3KgiCrQ9aCcjmPxu2uoBD/Ank=",
+            "rev": "8c48a699e201aa5559227a96d879b2f57192b354",
+            "sha256": "sha256-Ke8bM5o33s1h1fHY7Y10fYKpVwS3/pU7iOBpBOC0Dvw=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://github.com/neovide/neovide.git"
         },
-        "version": "nightly"
+        "version": "8c48a699e201aa5559227a96d879b2f57192b354"
     },
     "qebspil": {
         "cargoLock": null,
@@ -140,12 +140,12 @@
             "name": null,
             "owner": "radareorg",
             "repo": "r2ghidra",
-            "rev": "6.1.2",
-            "sha256": "sha256-bGA7izBSvlwnD4BZXNucYS39BDdmo+49cY3o4LjIpYM=",
+            "rev": "6.1.4",
+            "sha256": "sha256-uVMsONXethTq/BL9MBQkDP3iJ6t25PEnpeD/Y17dpxM=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "6.1.2"
+        "version": "6.1.4"
     },
     "radare2-mcp": {
         "cargoLock": null,
@@ -161,12 +161,12 @@
             "name": null,
             "owner": "radareorg",
             "repo": "radare2-mcp",
-            "rev": "1.7.2",
-            "sha256": "sha256-ToSvRmgOyrmsFWjfwuDit5hLXYJQD7YKGoy2utkqUe0=",
+            "rev": "1.8.0",
+            "sha256": "sha256-1tV3mG1hEIcq18cHn5kS4n9ocVZsHQ5A4TCTA3OKzn8=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "1.7.2"
+        "version": "1.8.0"
     },
     "slbounce": {
         "cargoLock": null,
