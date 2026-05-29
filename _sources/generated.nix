@@ -56,6 +56,17 @@
       sha256 = "sha256-MFnW9cXFzqmdtC31r8cRcihV3NjGAC6+2/DnNVMheCI=";
     };
   };
+  grimoire = {
+    pname = "grimoire";
+    version = "v1.14.2";
+    src = fetchFromGitHub {
+      owner = "Slush97";
+      repo = "grimoire";
+      rev = "v1.14.2";
+      fetchSubmodules = false;
+      sha256 = "sha256-iRZF06kjmJJJOeiUpWm8T2REO/FSdpwc73dOXu6Xs9w=";
+    };
+  };
   neovide = {
     pname = "neovide";
     version = "8c48a699e201aa5559227a96d879b2f57192b354";
@@ -121,6 +132,23 @@
       rev = "v5";
       fetchSubmodules = false;
       sha256 = "sha256-w+0SKR0A/hcFU6iFEOgyG+vWwgAWF8h9D0/X7GSFm7w=";
+    };
+  };
+  vpkmerge = {
+    pname = "vpkmerge";
+    version = "v0.7.0";
+    src = fetchFromGitHub {
+      owner = "Slush97";
+      repo = "vpkmerge";
+      rev = "v0.7.0";
+      fetchSubmodules = false;
+      sha256 = "sha256-CaNyzN8kRtzKwIUAe1or6ZhcaZNeGCKNCkRUTK2f/H8=";
+    };
+    cargoLock."Cargo.lock" = {
+      lockFile = ./. + "/sha256-CaNyzN8kRtzKwIUAe1or6ZhcaZNeGCKNCkRUTK2f_H8=/Cargo.lock";
+      outputHashes = {
+        
+      };
     };
   };
 }

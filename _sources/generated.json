@@ -81,6 +81,27 @@
         },
         "version": "v3.2.0"
     },
+    "grimoire": {
+        "cargoLock": null,
+        "date": null,
+        "extract": null,
+        "name": "grimoire",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "Slush97",
+            "repo": "grimoire",
+            "rev": "v1.14.2",
+            "sha256": "sha256-iRZF06kjmJJJOeiUpWm8T2REO/FSdpwc73dOXu6Xs9w=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "v1.14.2"
+    },
     "neovide": {
         "cargoLock": {
             "Cargo.lock": [
@@ -188,5 +209,31 @@
             "type": "github"
         },
         "version": "v5"
+    },
+    "vpkmerge": {
+        "cargoLock": {
+            "Cargo.lock": [
+                "sha256-CaNyzN8kRtzKwIUAe1or6ZhcaZNeGCKNCkRUTK2f_H8=/Cargo.lock",
+                {}
+            ]
+        },
+        "date": null,
+        "extract": null,
+        "name": "vpkmerge",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "Slush97",
+            "repo": "vpkmerge",
+            "rev": "v0.7.0",
+            "sha256": "sha256-CaNyzN8kRtzKwIUAe1or6ZhcaZNeGCKNCkRUTK2f/H8=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "v0.7.0"
     }
 }

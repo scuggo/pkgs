@@ -36,3 +36,12 @@ src.git = "https://github.com/neovide/neovide.git"
 src.git_branch = "nightly"
 fetch.git = "https://github.com/neovide/neovide.git"
 cargo_lock = ["Cargo.lock"]
+
+[grimoire]
+src.github = "Slush97/grimoire"
+fetch.github = "Slush97/grimoire"
+
+[vpkmerge]
+src.github = "Slush97/vpkmerge"
+fetch.github = "Slush97/vpkmerge"
+cargo_lock = ["Cargo.lock"]
