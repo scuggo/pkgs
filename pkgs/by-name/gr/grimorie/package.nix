@@ -10,15 +10,15 @@
   gnumake,
   pkg-config,
   makeWrapper,
-  electron_39,
+  electron_40,
   vpkmerge,
   sqlite,
   callPackage,
 }: let
-  version = "1.13.1";
   sources = callPackage ../../../../_sources/generated.nix {};
 
   src = sources.grimoire.src;
+  version = src.rev;
 
   # This would go into nvfetcher but it isnt versioned..
   grimoire-social-src = fetchFromGitHub {
@@ -31,8 +31,8 @@
   pnpmDeps = pnpm.fetchDeps {
     pname = "grimoire";
     inherit version src;
-    fetcherVersion = 2;
-    hash = "sha256-ARJihXqqSVpzrA7qLGUFoQRW0ydgcIAunZJeFB3WN5s=";
+    fetcherVersion = 3;
+    hash = "sha256-aSjELhEyEbQ7qT8fI5VfIDOHrsgHHL18Dsphm6sA8J4=";
   };
 in
   stdenv.mkDerivation {
@@ -48,7 +48,7 @@ in
       gnumake
       pkg-config
       makeWrapper
-      electron_39
+      electron_40
     ];
 
     buildInputs = [
@@ -79,7 +79,7 @@ in
         HOME="$TMPDIR" node \
           "${nodejs_22}/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js" \
           rebuild \
-          --nodedir="${electron_39.headers}"
+          --nodedir="${electron_40.headers}"
       )
 
       pnpm exec electron-vite build
@@ -107,7 +107,7 @@ in
       done
 
       mkdir -p $out/bin
-      makeWrapper ${electron_39}/bin/electron $out/bin/grimoire \
+      makeWrapper ${electron_40}/bin/electron $out/bin/grimoire \
         --add-flags "$out/lib/grimoire" \
         --set ELECTRON_RESOURCES_PATH "$out/lib/grimoire" \
         --set NODE_ENV production
