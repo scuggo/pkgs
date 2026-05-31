@@ -2,6 +2,10 @@
 src.github = "zed-industries/claude-code-acp"
 fetch.github = "zed-industries/claude-code-acp"
 
+[claude-sync]
+src.github = "tawanorg/claude-sync"
+fetch.github = "tawanorg/claude-sync"
+
 [flightcore]
 src.github = "R2NorthstarTools/FlightCore"
 fetch.github = "R2NorthstarTools/FlightCore"

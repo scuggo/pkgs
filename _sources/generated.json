@@ -60,6 +60,27 @@
         },
         "version": "v0.35.0"
     },
+    "claude-sync": {
+        "cargoLock": null,
+        "date": null,
+        "extract": null,
+        "name": "claude-sync",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "tawanorg",
+            "repo": "claude-sync",
+            "rev": "v1.9.0",
+            "sha256": "sha256-5waB01wmSsFUkBB/PmT9yY5b1J/aapZJCnm5O21q+Q4=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "v1.9.0"
+    },
     "flightcore": {
         "cargoLock": null,
         "date": null,

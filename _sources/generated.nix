@@ -45,6 +45,17 @@
       sha256 = "sha256-xb6D4J+EmbK5XCrZCyv1LWYdfmaNDcw7Hk4nHg76uAo=";
     };
   };
+  claude-sync = {
+    pname = "claude-sync";
+    version = "v1.9.0";
+    src = fetchFromGitHub {
+      owner = "tawanorg";
+      repo = "claude-sync";
+      rev = "v1.9.0";
+      fetchSubmodules = false;
+      sha256 = "sha256-5waB01wmSsFUkBB/PmT9yY5b1J/aapZJCnm5O21q+Q4=";
+    };
+  };
   flightcore = {
     pname = "flightcore";
     version = "v3.2.0";
