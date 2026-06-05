@@ -14,6 +14,8 @@
   vpkmerge,
   sqlite,
   callPackage,
+  makeDesktopItem,
+  copyDesktopItems,
 }: let
   sources = callPackage ../../../../_sources/generated.nix {};
 
@@ -34,6 +36,14 @@
     fetcherVersion = 3;
     hash = "sha256-aSjELhEyEbQ7qT8fI5VfIDOHrsgHHL18Dsphm6sA8J4=";
   };
+
+  desktopItem = makeDesktopItem {
+    name = "grimoire";
+    exec = "/bin/grimoire %u";
+    desktopName = "Grimoire";
+    categories = ["Utility"];
+    mimeTypes = ["x-scheme-handler/grimoire"];
+  };
 in
   stdenv.mkDerivation {
     pname = "grimoire";
@@ -49,7 +59,10 @@ in
       pkg-config
       makeWrapper
       electron_40
+      copyDesktopItems
     ];
+
+    desktopItems = [desktopItem];
 
     buildInputs = [
       sqlite
@@ -96,21 +109,21 @@ in
       mkdir -p $out/lib/grimoire/resources
       cp -r resources/vpkmerge $out/lib/grimoire/resources/vpkmerge
       echo '{"name":"grimoire","version":"${version}","main":"dist/main/index.js"}' \
-        > $out/lib/grimoire/package.json
+      > $out/lib/grimoire/package.json
 
       cp -r node_modules $out/lib/grimoire/node_modules
 
       rm -rf "$out/lib/grimoire/node_modules/@grimoire"
 
       find "$out/lib/grimoire/node_modules" -type l | while read -r link; do
-        [ -e "$link" ] || rm -f "$link"
+      [ -e "$link" ] || rm -f "$link"
       done
 
       mkdir -p $out/bin
       makeWrapper ${electron_40}/bin/electron $out/bin/grimoire \
-        --add-flags "$out/lib/grimoire" \
-        --set ELECTRON_RESOURCES_PATH "$out/lib/grimoire" \
-        --set NODE_ENV production
+      --add-flags "$out/lib/grimoire" \
+      --set ELECTRON_RESOURCES_PATH "$out/lib/grimoire" \
+      --set NODE_ENV production
 
       runHook postInstall
     '';
